@@ -1,6 +1,6 @@
 import "./App.css";
-import Header from "./Components/Header";
-import Notes from "./Components/Notes";
+import Header from "./components/Header.jsx";
+import Notes from "./components/Notes.jsx";
 
 function App() {
   return (

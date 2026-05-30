@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import CreateNote from "./CreateNote";
+import CreateNote from "./CreateNote.jsx";
 import "./notes.css";
 import { v4 as uuid } from "uuid";
 import Note from "./Note";
