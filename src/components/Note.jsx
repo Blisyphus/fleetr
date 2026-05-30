@@ -2,18 +2,17 @@ import React from "react";
 
 const Note = ({ id, text, editHandler, deleteHandler }) => {
   return (
-    <div className="note">
-      <div className="note-body">{text}</div>
-      <div className="note_footer" style={{ justifyContent: "flex-end" }}>
+    <article className="note">
+      <p className="note-body">{text}</p>
+      <div className="note_footer">
         <button className="note_delete" onClick={() => deleteHandler(id)}>
           Delete
         </button>{" "}
-        &nbsp;
         <button className="note_save" onClick={() => editHandler(id, text)}>
           Edit
         </button>
       </div>
-    </div>
+    </article>
   );
 };
 

@@ -16,7 +16,8 @@
 .note_footer {
     display: flex;
     align-items: center;
-    justify-content: space-between;
+    justify-content: flex-end;
+    gap: 1rem;
     margin-bottom: 15px;
 }
 
@@ -34,7 +35,7 @@
 }
 
 .note textarea::placeholder {
-    color: #fff;
+    color: #ffffffb9;
 }
 
 .note_save, .note_delete {
@@ -50,12 +51,12 @@
 
 .note_save:hover {
     background: #fff;
-    border: 1.5px solid #fff;
-    color: #4b1589;
+    border: #fff;
+    color: #015353;
 }
 
 .note_delete:hover{
     background: tomato;
     color: white;
-    border: red;
+    border: tomato;
 }
