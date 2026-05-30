@@ -1,7 +1,8 @@
 body {
-  background-image: url("https://images.freeimages.com/images/large-previews/c0a/fire-flare-1188516.jpg");
+  /* background-image: url("https://images.freeimages.com/images/large-previews/c0a/fire-flare-1188516.jpg");
   background-repeat: no-repeat;
-  background-size: cover;
+  background-size: cover; */
+  background-color: rgb(1, 83, 83);
 }
 
 .main {

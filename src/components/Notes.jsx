@@ -6,7 +6,10 @@ import Note from "./Note";
 
 const Notes = () => {
   const [inputText, setInputText] = useState("");
-  const [notes, setNotes] = useState([]);
+  const [notes, setNotes] = useState(() => {
+    const saved = localStorage.getItem("Notes");
+    return saved ? JSON.parse(saved) : [];
+  });
   const [editToggle, setEditToggle] = useState(null);
 
   const editHandler = (id, text) => {
@@ -39,21 +42,22 @@ const Notes = () => {
     setNotes(newNotes);
   };
 
-  useEffect(() => {
-    const data = JSON.parse(localStorage.getItem("Notes"));
-    if (data) {
-      setNotes(data);
-    }
-  }, []);
+//   useEffect(() => {
+//     const data = JSON.parse(localStorage.getItem("Notes"));
+//     if (data) {
+//       setNotes(data);
+//     }
+//   }, []);
 
   useEffect(() => {
     localStorage.setItem("Notes", JSON.stringify(notes));
   }, [notes]);
   return (
-    <div className="notes">
+    <section className="notes">
       {notes.map((note) =>
         editToggle === note.id ? (
           <CreateNote
+            key={note.id}
             inputText={inputText}
             setInputText={setInputText}
             saveHandler={saveHandler}
@@ -70,6 +74,7 @@ const Notes = () => {
       )}
       {editToggle === null ? (
         <CreateNote
+          key ={note.id}
           inputText={inputText}
           setInputText={setInputText}
           saveHandler={saveHandler}
@@ -77,7 +82,7 @@ const Notes = () => {
       ) : (
         <></>
       )}
-    </div>
+    </section>
   );
 };
 

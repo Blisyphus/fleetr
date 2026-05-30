@@ -5,7 +5,7 @@ const Note = ({ id, text, editHandler, deleteHandler }) => {
     <div className="note">
       <div className="note-body">{text}</div>
       <div className="note_footer" style={{ justifyContent: "flex-end" }}>
-        <button className="note_save" onClick={() => deleteHandler(id)}>
+        <button className="note_delete" onClick={() => deleteHandler(id)}>
           Delete
         </button>{" "}
         &nbsp;

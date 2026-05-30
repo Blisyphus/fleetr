@@ -37,7 +37,7 @@
     color: #fff;
 }
 
-.note_save {
+.note_save, .note_delete {
     background: transparent;
     transition: 0.1s ease-in-out;
     border: 1.5px solid #fff;
@@ -52,4 +52,10 @@
     background: #fff;
     border: 1.5px solid #fff;
     color: #4b1589;
+}
+
+.note_delete:hover{
+    background: tomato;
+    color: white;
+    border: red;
 }
