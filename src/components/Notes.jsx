@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import CreateNote from "./CreateNote.jsx";
 import "./notes.css";
 import { v4 as uuid } from "uuid";
-import Note from "./Note";
+import Note from "./Note.jsx";
 
 const Notes = () => {
   const [inputText, setInputText] = useState("");
@@ -74,7 +74,7 @@ const Notes = () => {
       )}
       {editToggle === null ? (
         <CreateNote
-          key ={note.id}
+        //   key ={note.id}
           inputText={inputText}
           setInputText={setInputText}
           saveHandler={saveHandler}
