@@ -68,12 +68,12 @@
 
 .note_save:hover {
     background: #fff;
-    border: #fff;
+    border: 1.5px solid #fff;
     color: #015353;
 }
 
 .note_delete:hover{
     background: tomato;
     color: white;
-    border: tomato;
+    border: 1.5px solid tomato;
 }
