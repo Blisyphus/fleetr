@@ -4,7 +4,7 @@ const CreateNote = ({ inputText, setInputText, saveHandler }) => {
   const char = 100;
   const charLimit = char - inputText.length;
   return (
-    <div className="create_note">
+    <form className="create_note">
       <textarea
         cols={10}
         rows={5}
@@ -19,7 +19,7 @@ const CreateNote = ({ inputText, setInputText, saveHandler }) => {
           Save
         </button>
       </div>
-    </div>
+    </form>
   );
 };
 
