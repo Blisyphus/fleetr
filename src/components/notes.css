@@ -11,6 +11,7 @@
     flex-direction: column;
     justify-content: space-between;
     word-wrap: break-word;
+    line-height: 1.5;
 }
 
 .create_note {
