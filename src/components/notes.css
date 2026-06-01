@@ -1,4 +1,4 @@
-.note {
+.note, .create_note {
     background: rgba(255, 255, 255, 0.1);
     backdrop-filter: blur(5px);
     box-shadow: inset -6px -4px 2px rgba(255, 255, 255, 0.03);
@@ -13,6 +13,21 @@
     word-wrap: break-word;
 }
 
+.create_note {
+    background: rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(5px);
+    box-shadow: inset -6px -4px 2px rgba(255, 255, 255, 0.03);
+    border-radius: 0;
+    border: 5px solid white;
+    color: #fff;
+    padding: 15px;
+    height: 80px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    word-wrap: break-word;
+}
+
 .note_footer {
     display: flex;
     align-items: center;
@@ -21,7 +36,7 @@
     margin-bottom: 15px;
 }
 
-.note textarea {
+.note textarea, .create_note textarea {
     white-space: pre-wrap;
     background: transparent;
     border: none;
@@ -30,12 +45,13 @@
     font-size: 18px;
 }
 
-.note textarea:focus {
+.note textarea:focus, .create_note textarea:focus {
     outline: none;
 }
 
-.note textarea::placeholder {
+.create_note textarea::placeholder {
     color: #ffffffb9;
+    font-size: 30px;
 }
 
 .note_save, .note_delete {

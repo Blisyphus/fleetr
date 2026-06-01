@@ -4,17 +4,17 @@ const CreateNote = ({ inputText, setInputText, saveHandler }) => {
   const char = 100;
   const charLimit = char - inputText.length;
   return (
-    <div className="note">
+    <div className="create_note">
       <textarea
         cols={10}
         rows={5}
-        placeholder="Type..."
+        placeholder="Click here to type, Champ"
         value={inputText}
         onChange={(e) => setInputText(e.target.value)}
         maxLength={100}
       ></textarea>
       <div className="note_footer">
-        <span className="label">{charLimit} Left</span>
+        <span className="label">{charLimit} characters left</span>
         <button className="note_save" onClick={saveHandler}>
           Save
         </button>
