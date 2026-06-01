@@ -6,6 +6,7 @@ import Note from "./Note.jsx";
 
 const Notes = () => {
   const [inputText, setInputText] = useState("");
+
   const [notes, setNotes] = useState(() => {
     const saved = localStorage.getItem("Notes");
     return saved ? JSON.parse(saved) : [];
@@ -16,6 +17,7 @@ const Notes = () => {
     setEditToggle(id);
     setInputText(text);
   };
+
   const saveHandler = () => {
     if (editToggle) {
       setNotes(
@@ -52,6 +54,7 @@ const Notes = () => {
   useEffect(() => {
     localStorage.setItem("Notes", JSON.stringify(notes));
   }, [notes]);
+
   return (
     <section className="notes">
       {notes.map((note) =>
