@@ -77,3 +77,96 @@
     color: white;
     border: 1.5px solid tomato;
 }
+
+
+/* modal styles */
+/* Dark background overlay */
+.modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+
+  background: rgba(0, 0, 0, 0.5);
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  z-index: 1000;
+}
+
+/* Modal box */
+.modal {
+  background: white;
+  padding: 2rem;
+  border-radius: 12px;
+
+  width: 90%;
+  max-width: 400px;
+
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+
+  text-align: center;
+}
+
+/* Title */
+.modal h3 {
+  margin-top: 0;
+  margin-bottom: 1rem;
+}
+
+/* Message */
+.modal p {
+  margin-bottom: 1.5rem;
+  color: #555;
+}
+
+/* Button container */
+.modal-buttons {
+  display: flex;
+  justify-content: center;
+  gap: 1rem;
+}
+
+/* Shared button styles */
+.modal-buttons button {
+  padding: 0.7rem 1.5rem;
+  border: none;
+  border-radius: 8px;
+
+  cursor: pointer;
+  font-size: 0.95rem;
+
+  transition: background-color 0.2s ease,
+              transform 0.1s ease;
+}
+
+.modal-buttons button:hover {
+  transform: translateY(-2px);
+}
+
+.modal-buttons button:active {
+  transform: translateY(0);
+}
+
+/* Delete button */
+.confirm-btn {
+  background-color: #e53935;
+  color: white;
+}
+
+.confirm-btn:hover {
+  background-color: #c62828;
+}
+
+/* Cancel button */
+.cancel-btn {
+  background-color: #e0e0e0;
+  color: #333;
+}
+
+.cancel-btn:hover {
+  background-color: #d5d5d5;
+}
