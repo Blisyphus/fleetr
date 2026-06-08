@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import CreateNote from "./CreateNote.jsx";
+import DeleteModal from "./DeleteModal.jsx";
 import "./notes.css";
 import { v4 as uuid } from "uuid";
 import Note from "./Note.jsx";
@@ -12,6 +13,8 @@ const Notes = () => {
     return saved ? JSON.parse(saved) : [];
   });
   const [editToggle, setEditToggle] = useState(null);
+
+  const [deleteTarget, setDeleteTarget] = useState(null);
 
   const editHandler = (id, text) => {
     setEditToggle(id);
@@ -40,8 +43,16 @@ const Notes = () => {
   };
 
   const deleteHandler = (id) => {
-    const newNotes = notes.filter((n) => n.id !== id);
-    setNotes(newNotes);
+    setDeleteTarget(id);
+  };
+
+  const confirmDelete = () => {
+    setNotes(notes.filter((note) => note.id !== deleteTarget));
+    setDeleteTarget(null);
+  };
+
+  const cancelDelete = () => {
+    setDeleteTarget(null);
   };
 
 //   useEffect(() => {
@@ -77,13 +88,16 @@ const Notes = () => {
       )}
       {editToggle === null ? (
         <CreateNote
-        //   key ={note.id}
+          //   key ={note.id}
           inputText={inputText}
           setInputText={setInputText}
           saveHandler={saveHandler}
         />
       ) : (
         <></>
+      )}
+      {deleteTarget && (
+        <DeleteModal onConfirm={confirmDelete} onCancel={cancelDelete} />
       )}
     </section>
   );
