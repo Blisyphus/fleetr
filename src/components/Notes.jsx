@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import CreateNote from "./CreateNote.jsx";
 import DeleteModal from "./DeleteModal.jsx";
+import ExpandModal from "./ExpandModal.jsx";
 import "./notes.css";
 import { v4 as uuid } from "uuid";
 import Note from "./Note.jsx";
@@ -15,6 +16,51 @@ const Notes = () => {
   const [editToggle, setEditToggle] = useState(null);
 
   const [deleteTarget, setDeleteTarget] = useState(null);
+
+  const [expandTarget, setExpandTarget] = useState(null);
+  const [expandStatus, setExpandStatus] = useState("idle");
+  const [expandResult, setExpandResult] = useState("");
+  const [expandError, setExpandError] = useState("");
+
+  const runExpand = async (text) => {
+    setExpandStatus("loading");
+
+    try {
+      const response = await fetch("/api/expand", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ text }),
+      });
+
+      const data = await response.json();
+
+      if (!response.ok) {
+        throw new Error(data.error || "Failed to expand note.");
+      }
+
+      setExpandResult(data.expansion);
+      setExpandStatus("success");
+    } catch (error) {
+      setExpandError(error.message);
+      setExpandStatus("error");
+    }
+  };
+
+  const expandHandler = (id, text) => {
+    setExpandTarget({ id, text });
+    runExpand(text);
+  };
+
+  const retryExpand = () => {
+    if (expandTarget) runExpand(expandTarget.text);
+  };
+
+  const closeExpand = () => {
+    setExpandTarget(null);
+    setExpandStatus("idle");
+    setExpandResult("");
+    setExpandError("");
+  };
 
   const editHandler = (id, text) => {
     setEditToggle(id);
@@ -83,6 +129,7 @@ const Notes = () => {
             text={note.text}
             editHandler={editHandler}
             deleteHandler={deleteHandler}
+            expandHandler={expandHandler}
           ></Note>
         ),
       )}
@@ -98,6 +145,15 @@ const Notes = () => {
       )}
       {deleteTarget && (
         <DeleteModal onConfirm={confirmDelete} onCancel={cancelDelete} />
+      )}
+      {expandTarget && (
+        <ExpandModal
+          status={expandStatus}
+          error={expandError}
+          expansion={expandResult}
+          onClose={closeExpand}
+          onRetry={retryExpand}
+        />
       )}
     </section>
   );
