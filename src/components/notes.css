@@ -55,7 +55,7 @@
     font-size: 30px;
 }
 
-.note_save, .note_delete {
+.note_save, .note_delete, .note_expand {
     background: transparent;
     transition: 0.1s ease-in-out;
     border: 1.5px solid #fff;
@@ -66,7 +66,7 @@
     cursor: pointer;
 }
 
-.note_save:hover {
+.note_save:hover, .note_expand:hover {
     background: #fff;
     border: 1.5px solid #fff;
     color: #015353;
@@ -169,4 +169,19 @@
 
 .cancel-btn:hover {
   background-color: #d5d5d5;
+}
+
+/* Expand modal */
+.expand-modal {
+  max-width: 500px;
+  text-align: left;
+}
+
+.expand-text {
+  white-space: pre-wrap;
+  color: #222;
+}
+
+.expand-error {
+  color: #c62828;
 }
