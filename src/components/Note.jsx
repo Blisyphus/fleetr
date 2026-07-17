@@ -1,6 +1,6 @@
 import React from "react";
 
-const Note = ({ id, text, editHandler, deleteHandler }) => {
+const Note = ({ id, text, editHandler, deleteHandler, expandHandler }) => {
   return (
     <article className="note">
       <p className="note-body">{text}</p>
@@ -10,6 +10,9 @@ const Note = ({ id, text, editHandler, deleteHandler }) => {
         </button>{" "}
         <button className="note_save" onClick={() => editHandler(id, text)}>
           Edit
+        </button>{" "}
+        <button className="note_expand" onClick={() => expandHandler(id, text)}>
+          Expand
         </button>
       </div>
     </article>
