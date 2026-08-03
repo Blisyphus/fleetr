@@ -13,8 +13,10 @@
   "dependencies": {
     "@ai-sdk/google": "^4.0.18",
     "ai": "^7.0.31",
+    "framer-motion": "^12.43.0",
     "react": "^19.2.6",
     "react-dom": "^19.2.6",
+    "react-router-dom": "^7.18.2",
     "uuid": "^14.0.0"
   },
   "devDependencies": {
