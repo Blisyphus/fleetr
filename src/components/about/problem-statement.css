@@ -1,0 +1,31 @@
+.problem {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 3rem 15px 5rem;
+  text-align: center;
+  display: grid;
+  place-items: center;
+}
+
+.problem_title {
+  color: var(--color-text);
+  font-size: 34px;
+  font-weight: 700;
+  line-height: 1.25;
+  margin: 0 0 1rem;
+  max-width: 800px;
+}
+
+.problem_body {
+  color: var(--color-text-muted);
+  font-size: 17px;
+  margin: 0 0 2rem;
+  max-width: 800px;
+}
+
+.problem_image {
+  max-width: 100%;
+  border-radius: var(--radius-card);
+  border: 1.5px solid var(--color-border);
+  box-shadow: var(--shadow-card);
+}
