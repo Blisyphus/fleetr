@@ -1,12 +1,13 @@
-// import Header from "../components/Header.jsx";
 import Notes from "../components/Notes.jsx";
+import PageTransition from "../components/PageTransition.jsx";
 
 const NotesPage = () => {
   return (
-    <div className="main">
-      {/* <Header /> */}
-      <Notes />
-    </div>
+    <PageTransition>
+      <div className="main">
+        <Notes />
+      </div>
+    </PageTransition>
   );
 };
 

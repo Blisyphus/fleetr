@@ -8,11 +8,11 @@ import "./features.css";
 const features = [
   {
     title: "Local-first Storage",
-    body: "Your notes live in your browser, not someone else's server — no account, no sync, nothing to configure.",
+    body: "Your notes live in your browser, no account or setup required.",
     gif: createNoteGif,
   },
   {
-    title: "AI Expand",
+    title: "Expand with AI",
     body: "Turn a short fleeting thought into a fuller note with one click.",
     gif: expandNoteGif,
   },
