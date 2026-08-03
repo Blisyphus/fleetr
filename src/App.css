@@ -1,6 +1,7 @@
 body {
-  background-color: #015353;
+  background-color: var(--color-bg);
   font-family: Arial, Helvetica, sans-serif;
+  overflow-x: hidden;
 }
 
 .main {
@@ -19,7 +20,7 @@ body {
 }
 
 .title {
-  color: #fff;
+  color: var(--color-text);
   font-size: 38px;
   font-weight: 400;
 }
@@ -29,18 +30,18 @@ body {
   margin: 0 auto;
   display: grid;
   grid-gap: 1rem;
-  grid-template-columns: repeat(3, minmax(300px, 1fr));
+  grid-template-columns: repeat(4, minmax(180px, 1fr));
 }
 
 
 @media screen and (max-width: 900px) {
   .notes {
-    grid-template-columns: repeat(2, minmax(300px, 1fr));
+    grid-template-columns: repeat(2, minmax(180px, 1fr));
   }
 }
 
 @media screen and (max-width: 500px) {
   .notes {
-    grid-template-columns: repeat(1, minmax(300px, 1fr));
+    grid-template-columns: repeat(1, minmax(180px, 1fr));
   }
 }
