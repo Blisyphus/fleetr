@@ -1,5 +1,11 @@
+import PageTransition from "../components/PageTransition.jsx";
+
 const Contact = () => {
-  return <section className="page-placeholder"></section>;
+  return (
+    <PageTransition>
+      <section className="page-placeholder"></section>
+    </PageTransition>
+  );
 };
 
 export default Contact;
