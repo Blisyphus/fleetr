@@ -15,7 +15,7 @@ const CreateNote = ({ inputText, setInputText, saveHandler }) => {
       ></textarea>
       <div className="note_footer">
         <span className="label">{charLimit} characters left</span>
-        <button className="note_save" onClick={saveHandler}>
+        <button type="button" className="note_save" onClick={saveHandler}>
           Save
         </button>
       </div>
