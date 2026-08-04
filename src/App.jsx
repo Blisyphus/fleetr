@@ -1,3 +1,4 @@
+import { useEffect } from "react";
 import { BrowserRouter, Routes, Route, useLocation } from "react-router-dom";
 import { AnimatePresence } from "framer-motion";
 import "./App.css";
@@ -10,8 +11,15 @@ import About from "./pages/About.jsx";
 import Contact from "./pages/Contact.jsx";
 import Changelog from "./pages/Changelog.jsx";
 
+let hasMountedOnce = false;
+
 function AnimatedRoutes() {
   const location = useLocation();
+  const skipOverlay = !hasMountedOnce;
+
+  useEffect(() => {
+    hasMountedOnce = true;
+  }, []);
 
   return (
     <div style={{ position: "relative" }}>
@@ -23,7 +31,7 @@ function AnimatedRoutes() {
           <Route path="/changelog" element={<Changelog />} />
         </Routes>
       </AnimatePresence>
-      <TransitionOverlay />
+      <TransitionOverlay skip={skipOverlay} />
     </div>
   );
 }
