@@ -30,7 +30,7 @@
 .note-body {
     margin: 0;
     font-family: var(--font-note);
-    font-size: 14px;
+    font-size: 16.5px;
     line-height: 1.4;
     color: var(--color-text-muted);
     flex: 1;
@@ -47,6 +47,7 @@
     justify-content: flex-end;
     gap: 1rem;
     margin-bottom: 15px;
+    font-size: 14px;
 }
 
 .note textarea, .create_note textarea {

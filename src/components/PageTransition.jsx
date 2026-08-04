@@ -5,7 +5,8 @@ const pageVariants = {
   animate: { opacity: 1, filter: "blur(0px) brightness(1)" },
   exit: {
     opacity: 1,
-    filter: "blur(8px) brightness(0.15)",
+    filter: "blur(8px) brightness(0.8)",
+    // filter: "blur(8px)",
     position: "absolute",
     top: 0,
     left: 0,

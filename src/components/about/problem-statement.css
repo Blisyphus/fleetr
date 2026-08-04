@@ -1,6 +1,7 @@
 .problem {
   max-width: 1200px;
   margin: 0 auto;
+  margin-top: 3rem;
   padding: 3rem 15px 5rem;
   text-align: center;
   display: grid;
