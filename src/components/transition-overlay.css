@@ -1,0 +1,9 @@
+.transition-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 300;
+  background: var(--color-bg);
+  border-radius: 32px 32px 0 0;
+  box-shadow: 0 -20px 30px rgba(0, 0, 0, 0.3);
+  pointer-events: none;
+}

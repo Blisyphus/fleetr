@@ -1,9 +1,17 @@
 import { motion } from "framer-motion";
 
 const pageVariants = {
-  initial: { opacity: 0, y: 20 },
-  animate: { opacity: 1, y: 0 },
-  exit: { opacity: 0, y: -20 },
+  initial: { opacity: 0, filter: "blur(8px) brightness(1)" },
+  animate: { opacity: 1, filter: "blur(0px) brightness(1)" },
+  exit: {
+    opacity: 1,
+    filter: "blur(8px) brightness(0.15)",
+    position: "absolute",
+    top: 0,
+    left: 0,
+    right: 0,
+    zIndex: 2,
+  },
 };
 
 const PageTransition = ({ children }) => {
@@ -13,7 +21,7 @@ const PageTransition = ({ children }) => {
       initial="initial"
       animate="animate"
       exit="exit"
-      transition={{ duration: 0.4, ease: "easeInOut" }}
+      transition={{ duration: 0.6, ease: "easeInOut" }}
     >
       {children}
     </motion.div>
