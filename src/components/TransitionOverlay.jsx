@@ -2,8 +2,10 @@ import { motion } from "framer-motion";
 import { useLocation } from "react-router-dom";
 import "./transition-overlay.css";
 
-const TransitionOverlay = () => {
+const TransitionOverlay = ({ skip }) => {
   const location = useLocation();
+
+  if (skip) return null;
 
   return (
     <motion.div
