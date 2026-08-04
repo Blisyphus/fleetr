@@ -92,6 +92,7 @@
   width: 140px;
   height: 140px;
   top: 100%;
+  animation: hero_blob-float-up 6s ease-in-out infinite;
 }
 
 .hero_blob-right {
@@ -99,6 +100,27 @@
   width: 250px;
   height: 250px;
   top: 35%;
+  animation: hero_blob-float-down 4s ease-in-out infinite;
+}
+
+@keyframes hero_blob-float-up {
+  0%,
+  100% {
+    transform: translateY(-50%);
+  }
+  50% {
+    transform: translateY(calc(-50% - 20px));
+  }
+}
+
+@keyframes hero_blob-float-down {
+  0%,
+  100% {
+    transform: translateY(-50%);
+  }
+  50% {
+    transform: translateY(calc(-50% + 20px));
+  }
 }
 
 @media screen and (max-width: 900px) {

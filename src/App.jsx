@@ -2,6 +2,7 @@ import { BrowserRouter, Routes, Route, useLocation } from "react-router-dom";
 import { AnimatePresence } from "framer-motion";
 import "./App.css";
 import { ScrollDirectionProvider } from "./context/ScrollDirectionContext.jsx";
+import { useLenis } from "./hooks/useLenis.js";
 import Nav from "./components/Nav.jsx";
 import TransitionOverlay from "./components/TransitionOverlay.jsx";
 import NotesPage from "./pages/NotesPage.jsx";
@@ -28,6 +29,8 @@ function AnimatedRoutes() {
 }
 
 function App() {
+  useLenis();
+
   return (
     <BrowserRouter>
       <ScrollDirectionProvider>

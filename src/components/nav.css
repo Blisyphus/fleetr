@@ -13,8 +13,11 @@
 }
 
 .nav_brand {
-  color: var(--color-text);
-  font-size: 20px;
+  background: var(--gradient-accent);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  font-size: 23px;
   font-weight: 700;
 }
 
