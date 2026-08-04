@@ -16,7 +16,10 @@
 }
 
 .footer_logo {
-  color: var(--color-text);
+  background: var(--gradient-accent);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
   font-size: 18px;
   font-weight: 700;
 }
