@@ -7,7 +7,7 @@ import PageTransition from "../components/PageTransition.jsx";
 
 const About = () => {
   return (
-    <PageTransition>
+    <PageTransition className="landing-page">
       <Hero />
       <ProblemStatement />
       <Features />

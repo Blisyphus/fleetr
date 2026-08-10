@@ -1,0 +1,129 @@
+.sidebar_backdrop {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.3);
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.25s ease;
+  z-index: 250;
+}
+
+.sidebar_backdrop-open {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+.sidebar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  width: min(85vw, 300px);
+  background: var(--color-surface);
+  border-right: 1.5px solid var(--color-border);
+  border-radius: 0 1rem 1rem 0;
+  box-shadow: var(--shadow-card);
+  z-index: 260;
+  display: flex;
+  flex-direction: column;
+  transform: translateX(-100%);
+  transition: transform 0.4s ;
+}
+
+.sidebar-open {
+  transform: translateX(0);
+}
+
+.sidebar_header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 1.25rem;
+  border-bottom: 1.5px solid var(--color-border);
+}
+
+.sidebar_title {
+  background: var(--gradient-accent);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  font-size: 18px;
+  font-weight: 700;
+}
+
+.sidebar_close {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: transparent;
+  border: none;
+  color: var(--color-text-muted);
+  cursor: pointer;
+  padding: 0.25rem;
+}
+
+.sidebar_close:hover {
+  color: var(--color-text);
+}
+
+.sidebar_section {
+  flex: 1;
+  padding: 1.25rem;
+}
+
+.sidebar_section-label {
+  display: block;
+  color: var(--color-text-muted);
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  margin-bottom: 0.75rem;
+}
+
+.sidebar_item {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  width: 100%;
+  background: transparent;
+  border: none;
+  border-radius: 3rem;
+  text-align: left;
+  color: var(--color-text);
+  font: inherit;
+  font-size: 14px;
+  cursor: pointer;
+  padding: 1.5rem 1rem;
+}
+
+.sidebar_item:hover {
+  /* color: var(--color-accent); */
+  background: #dfe1e4;
+}
+
+.sidebar_footer {
+  border-top: 1.5px solid var(--color-border);
+  padding: 1rem 1.25rem;
+}
+
+.sidebar_footer-item {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  width: 100%;
+  background: transparent;
+  border: none;
+  border-radius: 3rem;
+  text-align: left;
+  color: var(--color-text);
+  font: inherit;
+  font-size: 15px;
+  cursor: pointer;
+  padding: 1.5rem 1rem;
+}
+
+.sidebar_footer-item:hover {
+  /* color: var(--color-accent); */
+  background: #c9cdd5;
+}

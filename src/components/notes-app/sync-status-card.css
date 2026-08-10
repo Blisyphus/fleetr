@@ -1,0 +1,187 @@
+.sync-status {
+  background: #f2f3fa;
+  border: 1.7px solid #c9cdd5;
+  border-radius: 10px;
+  padding: 1rem 1.25rem;
+}
+
+.sync-status_header {
+  display: flex;
+  align-items: baseline;
+  gap: 0.5rem;
+  padding-bottom: 0.75rem;
+  margin-bottom: 0.75rem;
+  border-bottom: 1.7px solid #c9cdd5;
+}
+
+.sync-status_brand {
+  background: var(--gradient-accent);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  font-size: 18px;
+  font-weight: 700;
+}
+
+.sync-status_version {
+  color: var(--color-text-muted);
+  font-size: 13px;
+}
+
+.sync-status_row {
+  display: flex;
+  align-items: center;
+  gap: 0.7rem;
+  /* justify-content: space-between; */
+  font-size: 14px;
+  color: var(--color-text-muted);
+  margin-bottom: 0.5rem;
+}
+
+.sync-status_row-label {
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+}
+
+.settings-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  font-size: 12px;
+  font-weight: 600;
+  padding: 0.3rem 0.8rem;
+  border: 1px solid #b8dabf;
+  border-radius: 999px;
+  background: #deeae6;
+  color: var(--color-text);
+}
+
+.settings-pill-dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: currentColor;
+}
+
+.settings-pill-good {
+  color: #1a9c5c;
+}
+
+.settings-pill-idle {
+  color: var(--color-text-muted);
+}
+
+.sync-status_tiles {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 0.75rem;
+  margin-top: 0.6rem;
+  padding-top: 0.6rem;
+  border-top: 1.7px solid #c9cdd5;
+}
+
+.settings-stats_tile {
+  background: var(--color-bg);
+  border-radius: 10px;
+  padding: 0.75rem;
+  text-align: center;
+}
+
+.settings-stats_tile-value {
+  display: block;
+  font-size: 18px;
+  font-weight: 700;
+  color: var(--color-text);
+}
+
+.settings-stats_tile-label {
+  font-size: 12px;
+  color: var(--color-text-muted);
+}
+
+.settings-stats_tile-blue {
+  background: #e3e8f1;
+}
+
+.settings-stats_tile-blue .settings-stats_tile-value {
+  color: #36618e;
+}
+
+.settings-stats_tile-green {
+  background: #e3f7ec;
+}
+
+.settings-stats_tile-green .settings-stats_tile-value {
+  color: #53b258;
+}
+
+.settings-stats_tile-gray {
+  background: #e4e6ec;
+}
+
+.settings-stats_tile-gray .settings-stats_tile-value {
+  color: var(--color-text);
+}
+
+@media screen and (max-width: 700px) {
+  .sync-status {
+    padding: 0.65rem 0.75rem;
+    border-radius: 8px;
+  }
+
+  .sync-status_header {
+    gap: 0.4rem;
+    padding-bottom: 0.4rem;
+    margin-bottom: 0.4rem;
+  }
+
+  .sync-status_brand {
+    font-size: 14px;
+  }
+
+  .sync-status_version {
+    font-size: 10px;
+  }
+
+  .sync-status_row {
+    gap: 0.4rem;
+    font-size: 11px;
+    margin-bottom: 0.3rem;
+  }
+
+  .sync-status_row-label svg {
+    width: 11px;
+    height: 11px;
+  }
+
+  .settings-pill {
+    gap: 0.25rem;
+    font-size: 9px;
+    padding: 0.15rem 0.5rem;
+  }
+
+  .settings-pill-dot {
+    width: 5px;
+    height: 5px;
+  }
+
+  .sync-status_tiles {
+    gap: 0.4rem;
+    margin-top: 0.35rem;
+    padding-top: 0.35rem;
+  }
+
+  .settings-stats_tile {
+    padding: 0.4rem;
+    border-radius: 7px;
+  }
+
+  .settings-stats_tile-value {
+    font-size: 13px;
+  }
+
+  .settings-stats_tile-label {
+    font-size: 9px;
+  }
+}

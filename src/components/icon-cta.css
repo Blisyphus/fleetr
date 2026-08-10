@@ -1,0 +1,73 @@
+.icon-cta {
+  display: inline-flex;
+  align-items: center;
+  padding: 4px;
+  border-radius: 999px;
+  transition: transform 0.5s cubic-bezier(0.22, 0.68, 0, 1);
+}
+
+.icon-cta:hover {
+  transform: scale(1.05);
+}
+
+.icon-cta_label {
+  padding: 0 0.5rem 0 1.25rem;
+  white-space: nowrap;
+}
+
+.icon-cta_circle {
+  position: relative;
+  overflow: hidden;
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 34px;
+  height: 34px;
+  border-radius: 50%;
+}
+
+.icon-cta_circle-light {
+  background: rgba(255, 255, 255, 0.18);
+}
+
+.icon-cta_circle-dark {
+  background: rgba(0, 0, 0, 0.06);
+}
+
+.icon-cta_icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 55%;
+  transition: transform 0.5s cubic-bezier(0.22, 0.68, 0, 1.5);
+}
+
+.icon-cta_icon-a {
+  transform: translateX(0);
+}
+
+.icon-cta_icon-b {
+  position: absolute;
+  transform: translateX(-250%);
+}
+
+.icon-cta:hover .icon-cta_icon-a {
+  transform: translateX(250%);
+}
+
+.icon-cta:hover .icon-cta_icon-b {
+  transform: translateX(0);
+}
+
+.icon-cta_circle-vertical .icon-cta_icon-b {
+  transform: translateY(-250%);
+}
+
+.icon-cta:hover .icon-cta_circle-vertical .icon-cta_icon-a {
+  transform: translateY(250%);
+}
+
+.icon-cta:hover .icon-cta_circle-vertical .icon-cta_icon-b {
+  transform: translateY(0);
+}

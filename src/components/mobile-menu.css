@@ -43,6 +43,15 @@
 }
 
 .mobile_menu-link {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  width: 100%;
+  background: transparent;
+  border: none;
+  text-align: left;
+  cursor: pointer;
+  font: inherit;
   color: var(--color-text);
   text-decoration: none;
   font-size: 20px;
@@ -56,6 +65,20 @@
   transition: 0.2s;
 }
 
+.mobile_menu-link_arrow {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 0;
+  flex-shrink: 0;
+  overflow: hidden;
+  transition: width 0.3s ease-out;
+}
+
+.mobile_menu-link:hover .mobile_menu-link_arrow {
+  width: 16px;
+}
+
 .mobile_menu-link-active {
   color: var(--color-text-muted);
   cursor: default;
@@ -63,6 +86,10 @@
 
 .mobile_menu-link-active:hover{
   background: none;
+}
+
+.mobile_menu-link-active:hover .mobile_menu-link_arrow {
+  width: 0;
 }
 
 @media screen and (min-width: 700px) {
