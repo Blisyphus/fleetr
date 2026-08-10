@@ -113,6 +113,14 @@
     font-size: 12px;
     font-weight: 500;
     cursor: pointer;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.3rem;
+}
+
+.note_btn-icon {
+    display: none;
+    flex-shrink: 0;
 }
 
 .note_save:hover, .note_expand:hover {
@@ -133,8 +141,15 @@
     }
 
     .note_save, .note_delete, .note_expand {
-        padding: 0.25rem 0.5rem;
-        font-size: 11px;
+        padding: 0.4rem;
+    }
+
+    .note_btn-icon {
+        display: inline-flex;
+    }
+
+    .note_btn-label {
+        display: none;
     }
 }
 
