@@ -1,8 +1,15 @@
 import { useEffect } from "react";
-import { BrowserRouter, Routes, Route, useLocation } from "react-router-dom";
+import {
+  BrowserRouter,
+  Routes,
+  Route,
+  Navigate,
+  useLocation,
+} from "react-router-dom";
 import { AnimatePresence } from "framer-motion";
 import "./App.css";
 import { ScrollDirectionProvider } from "./context/ScrollDirectionContext.jsx";
+import { AuthProvider } from "./context/AuthProvider.jsx";
 import { useLenis } from "./hooks/useLenis.js";
 import Nav from "./components/Nav.jsx";
 import TransitionOverlay from "./components/TransitionOverlay.jsx";
@@ -23,10 +30,12 @@ function AnimatedRoutes() {
 
   return (
     <div style={{ position: "relative" }}>
+      {location.pathname !== "/app" && <Nav />}
       <AnimatePresence>
         <Routes location={location} key={location.pathname}>
-          <Route path="/" element={<NotesPage />} />
-          <Route path="/about" element={<About />} />
+          <Route path="/" element={<About />} />
+          <Route path="/app" element={<NotesPage />} />
+          <Route path="/about" element={<Navigate to="/" replace />} />
           <Route path="/contact" element={<Contact />} />
           <Route path="/changelog" element={<Changelog />} />
         </Routes>
@@ -41,10 +50,11 @@ function App() {
 
   return (
     <BrowserRouter>
-      <ScrollDirectionProvider>
-        <Nav />
-        <AnimatedRoutes />
-      </ScrollDirectionProvider>
+      <AuthProvider>
+        <ScrollDirectionProvider>
+          <AnimatedRoutes />
+        </ScrollDirectionProvider>
+      </AuthProvider>
     </BrowserRouter>
   );
 }

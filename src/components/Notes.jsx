@@ -1,18 +1,17 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import CreateNote from "./CreateNote.jsx";
 import DeleteModal from "./DeleteModal.jsx";
 import ExpandModal from "./ExpandModal.jsx";
 import "./notes.css";
-import { v4 as uuid } from "uuid";
 import Note from "./Note.jsx";
+import { useNotesContext } from "../hooks/useNotesContext.js";
 
 const Notes = () => {
+  const [inputTitle, setInputTitle] = useState("");
   const [inputText, setInputText] = useState("");
 
-  const [notes, setNotes] = useState(() => {
-    const saved = localStorage.getItem("Notes");
-    return saved ? JSON.parse(saved) : [];
-  });
+  const { visibleNotes, loading, searchQuery, editNote, removeNote } =
+    useNotesContext();
   const [editToggle, setEditToggle] = useState(null);
 
   const [deleteTarget, setDeleteTarget] = useState(null);
@@ -62,28 +61,15 @@ const Notes = () => {
     setExpandError("");
   };
 
-  const editHandler = (id, text) => {
+  const editHandler = (id, title, text) => {
     setEditToggle(id);
+    setInputTitle(title);
     setInputText(text);
   };
 
   const saveHandler = () => {
-    if (editToggle) {
-      setNotes(
-        notes.map((note) =>
-          note.id === editToggle ? { ...note, text: inputText } : note,
-        ),
-      );
-    } else {
-      setNotes((prevNotes) => [
-        ...prevNotes,
-        {
-          id: uuid(),
-          text: inputText,
-        },
-      ]);
-    }
-
+    editNote(editToggle, inputTitle, inputText);
+    setInputTitle("");
     setInputText("");
     setEditToggle(null);
   };
@@ -93,7 +79,7 @@ const Notes = () => {
   };
 
   const confirmDelete = () => {
-    setNotes(notes.filter((note) => note.id !== deleteTarget));
+    removeNote(deleteTarget);
     setDeleteTarget(null);
   };
 
@@ -101,48 +87,35 @@ const Notes = () => {
     setDeleteTarget(null);
   };
 
-//   useEffect(() => {
-//     const data = JSON.parse(localStorage.getItem("Notes"));
-//     if (data) {
-//       setNotes(data);
-//     }
-//   }, []);
-
-  useEffect(() => {
-    localStorage.setItem("Notes", JSON.stringify(notes));
-  }, [notes]);
-
   return (
-    <section className="notes">
-      {notes.map((note) =>
-        editToggle === note.id ? (
-          <CreateNote
-            key={note.id}
-            inputText={inputText}
-            setInputText={setInputText}
-            saveHandler={saveHandler}
-          />
-        ) : (
-          <Note
-            key={note.id}
-            id={note.id}
-            text={note.text}
-            editHandler={editHandler}
-            deleteHandler={deleteHandler}
-            expandHandler={expandHandler}
-          ></Note>
-        ),
+    <section className="notes" data-lenis-prevent>
+      {!loading && visibleNotes.length === 0 && searchQuery.trim() && (
+        <p className="notes_empty">No notes match "{searchQuery.trim()}".</p>
       )}
-      {editToggle === null ? (
-        <CreateNote
-          //   key ={note.id}
-          inputText={inputText}
-          setInputText={setInputText}
-          saveHandler={saveHandler}
-        />
-      ) : (
-        <></>
-      )}
+      {loading
+        ? null
+        : visibleNotes.map((note) =>
+            editToggle === note.id ? (
+              <CreateNote
+                key={note.id}
+                inputTitle={inputTitle}
+                setInputTitle={setInputTitle}
+                inputText={inputText}
+                setInputText={setInputText}
+                saveHandler={saveHandler}
+              />
+            ) : (
+              <Note
+                key={note.id}
+                id={note.id}
+                title={note.title}
+                text={note.text}
+                editHandler={editHandler}
+                deleteHandler={deleteHandler}
+                expandHandler={expandHandler}
+              ></Note>
+            ),
+          )}
       {deleteTarget && (
         <DeleteModal onConfirm={confirmDelete} onCancel={cancelDelete} />
       )}

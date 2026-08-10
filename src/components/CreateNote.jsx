@@ -1,10 +1,24 @@
 import React from "react";
 
-const CreateNote = ({ inputText, setInputText, saveHandler }) => {
+const CreateNote = ({
+  inputTitle,
+  setInputTitle,
+  inputText,
+  setInputText,
+  saveHandler,
+}) => {
   const char = 150;
   const charLimit = char - inputText.length;
   return (
     <form className="create_note">
+      <input
+        type="text"
+        className="create_note-title"
+        placeholder="Title"
+        value={inputTitle}
+        onChange={(e) => setInputTitle(e.target.value)}
+        maxLength={80}
+      />
       <textarea
         cols={10}
         rows={5}

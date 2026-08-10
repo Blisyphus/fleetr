@@ -3,7 +3,7 @@ import Lenis from "lenis";
 
 export const useLenis = () => {
   useEffect(() => {
-    const lenis = new Lenis({ autoRaf: true });
+    const lenis = new Lenis({ autoRaf: true, anchors: true });
 
     return () => {
       lenis.destroy();

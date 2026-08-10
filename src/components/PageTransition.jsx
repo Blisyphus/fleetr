@@ -15,9 +15,10 @@ const pageVariants = {
   },
 };
 
-const PageTransition = ({ children }) => {
+const PageTransition = ({ children, className }) => {
   return (
     <motion.div
+      className={className}
       variants={pageVariants}
       initial="initial"
       animate="animate"

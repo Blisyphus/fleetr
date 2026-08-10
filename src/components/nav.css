@@ -2,14 +2,17 @@
   position: sticky;
   top: 0;
   z-index: 100;
+  background: var(--color-nav-bg);
+  backdrop-filter: blur(8px);
+}
+
+.nav_inner {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  /* max-width: 1200px; */
+  max-width: 1200px;
   margin: 0 auto;
-  padding: 1.5rem clamp(16px, 8vw, 160px);
-  background: var(--color-nav-bg);
-  backdrop-filter: blur(8px);
+  padding: 1.5rem 15px;
 }
 
 .nav_brand {
@@ -41,6 +44,20 @@
   font-weight: 700;
 }
 
+.nav_actions {
+  display: flex;
+  align-items: center;
+  gap: 1.25rem;
+}
+
+.nav_cta {
+  background: var(--color-text);
+  color: var(--color-surface);
+  text-decoration: none;
+  font-size: 14px;
+  font-weight: 700;
+}
+
 .nav_menu-toggle {
   display: none;
   align-items: center;
@@ -54,6 +71,10 @@
 
 @media screen and (max-width: 700px) {
   .nav_links {
+    display: none;
+  }
+
+  .nav_cta {
     display: none;
   }
 

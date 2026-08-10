@@ -36,9 +36,6 @@
 }
 
 .hero_cta {
-  display: inline-block;
-  padding: 0.75rem 1.5rem;
-  border-radius: 5px;
   font-size: 15px;
   font-weight: 600;
   text-decoration: none;
@@ -49,17 +46,9 @@
   color: var(--color-accent-contrast);
 }
 
-.hero_cta-primary:hover {
-  background: var(--color-accent-hover);
-}
-
 .hero_cta-secondary {
   background: var(--color-text);
   color: var(--color-surface);
-}
-
-.hero_cta-secondary:hover {
-  background: var(--color-text-muted);
 }
 
 .hero_visual {

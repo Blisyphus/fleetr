@@ -11,7 +11,7 @@ const Footer = () => {
         <span className="footer_logo">Fleetr</span>
         <nav className="footer_links">
           <Link to="/">Home</Link>
-          <Link to="/about">About</Link>
+          <Link to="/app">App</Link>
           <Link to="/contact">Contact</Link>
           <Link to="/changelog">Changelog</Link>
         </nav>

@@ -41,12 +41,6 @@
   text-decoration: none;
   font-weight: 700;
   font-size: 15px;
-  padding: 0.75rem 1.5rem;
-  border-radius: 10px;
-}
-
-.feedback_cta:hover {
-  background: var(--color-bg);
 }
 
 @media screen and (max-width: 700px) {
