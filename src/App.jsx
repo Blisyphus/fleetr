@@ -1,4 +1,3 @@
-import { useEffect } from "react";
 import {
   BrowserRouter,
   Routes,
@@ -12,21 +11,13 @@ import { ScrollDirectionProvider } from "./context/ScrollDirectionContext.jsx";
 import { AuthProvider } from "./context/AuthProvider.jsx";
 import { useLenis } from "./hooks/useLenis.js";
 import Nav from "./components/Nav.jsx";
-import TransitionOverlay from "./components/TransitionOverlay.jsx";
 import NotesPage from "./pages/NotesPage.jsx";
 import About from "./pages/About.jsx";
 import Contact from "./pages/Contact.jsx";
 import Changelog from "./pages/Changelog.jsx";
 
-let hasMountedOnce = false;
-
 function AnimatedRoutes() {
   const location = useLocation();
-  const skipOverlay = !hasMountedOnce;
-
-  useEffect(() => {
-    hasMountedOnce = true;
-  }, []);
 
   return (
     <div style={{ position: "relative" }}>
@@ -40,7 +31,6 @@ function AnimatedRoutes() {
           <Route path="/changelog" element={<Changelog />} />
         </Routes>
       </AnimatePresence>
-      <TransitionOverlay skip={skipOverlay} />
     </div>
   );
 }

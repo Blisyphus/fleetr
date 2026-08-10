@@ -1,29 +1,37 @@
+import { useEffect } from "react";
 import { motion } from "framer-motion";
 
+let hasMountedOnce = false;
+
 const pageVariants = {
-  initial: { opacity: 0, filter: "blur(8px) brightness(1)" },
-  animate: { opacity: 1, filter: "blur(0px) brightness(1)" },
+  initial: { y: "100vh" },
+  animate: { y: "0vh" },
   exit: {
-    opacity: 1,
     filter: "blur(8px) brightness(0.8)",
-    // filter: "blur(8px)",
+    zIndex: 1,
     position: "absolute",
     top: 0,
     left: 0,
     right: 0,
-    zIndex: 2,
   },
 };
 
 const PageTransition = ({ children, className }) => {
+  const skipEnter = !hasMountedOnce;
+
+  useEffect(() => {
+    hasMountedOnce = true;
+  }, []);
+
   return (
     <motion.div
       className={className}
+      style={{ position: "relative", zIndex: 2 }}
       variants={pageVariants}
-      initial="initial"
+      initial={skipEnter ? false : "initial"}
       animate="animate"
       exit="exit"
-      transition={{ duration: 0.6, ease: "easeInOut" }}
+      transition={{ duration: 0.9, ease: "easeInOut" }}
     >
       {children}
     </motion.div>
