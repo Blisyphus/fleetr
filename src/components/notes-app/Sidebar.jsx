@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { Link } from "react-router-dom";
 import { useNotesContext } from "../../hooks/useNotesContext.js";
 import EditSearchesModal from "./EditSearchesModal.jsx";
 import "./sidebar.css";
@@ -31,7 +32,9 @@ const Sidebar = ({
 
       <aside className={isOpen ? "sidebar sidebar-open" : "sidebar"}>
         <div className="sidebar_header">
-          <span className="sidebar_title">Fleetr</span>
+          <Link to="/" className="sidebar_title">
+            Fleetr
+          </Link>
           <button
             type="button"
             className="sidebar_close"

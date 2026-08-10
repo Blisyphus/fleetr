@@ -1,3 +1,4 @@
+import { Link } from "react-router-dom";
 import { useNotesContext } from "../../hooks/useNotesContext.js";
 import "./sync-status-card.css";
 
@@ -21,7 +22,9 @@ const SyncStatusCard = () => {
   return (
     <div className="sync-status">
       <div className="sync-status_header">
-        <span className="sync-status_brand">Fleetr</span>
+        <Link to="/" className="sync-status_brand">
+          Fleetr
+        </Link>
         <span className="sync-status_version">v0.1.0</span>
       </div>
 
