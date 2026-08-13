@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import CreateNote from "./CreateNote.jsx";
 import DeleteModal from "./DeleteModal.jsx";
 import ExpandModal from "./ExpandModal.jsx";
+import MergeModal from "./MergeModal.jsx";
 import "./notes.css";
 import Note from "./Note.jsx";
 import { useNotesContext } from "../hooks/useNotesContext.js";
@@ -10,8 +11,16 @@ const Notes = () => {
   const [inputTitle, setInputTitle] = useState("");
   const [inputText, setInputText] = useState("");
 
-  const { visibleNotes, loading, searchQuery, editNote, removeNote } =
-    useNotesContext();
+  const {
+    visibleNotes,
+    loading,
+    searchQuery,
+    editNote,
+    removeNote,
+    mergeCandidate,
+    acceptMerge,
+    dismissMergeSuggestion,
+  } = useNotesContext();
   const [editToggle, setEditToggle] = useState(null);
 
   const [deleteTarget, setDeleteTarget] = useState(null);
@@ -126,6 +135,13 @@ const Notes = () => {
           expansion={expandResult}
           onClose={closeExpand}
           onRetry={retryExpand}
+        />
+      )}
+      {mergeCandidate && (
+        <MergeModal
+          mergeCandidate={mergeCandidate}
+          onAccept={acceptMerge}
+          onReject={dismissMergeSuggestion}
         />
       )}
     </section>
