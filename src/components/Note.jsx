@@ -69,6 +69,7 @@ const Note = ({
   editHandler,
   deleteHandler,
   expandHandler,
+  expandedText,
 }) => {
   const dateLabel = formatCardDate(createdAt);
 
@@ -97,7 +98,7 @@ const Note = ({
         </button>{" "}
         <button
           className="note_expand"
-          onClick={() => expandHandler(id, text)}
+          onClick={() => expandHandler(id, text, expandedText)}
           aria-label="Expand"
         >
           <SparkleIcon />

@@ -1,6 +1,7 @@
 import { generateObject } from "ai";
 import { google } from "@ai-sdk/google";
 import { z } from "zod";
+import { isRateLimitError } from "./_util.js";
 
 const mergeSchema = z.object({
   shouldMerge: z
@@ -33,7 +34,7 @@ export default async function handler(req, res) {
 
   try {
     const { object } = await generateObject({
-      model: google("gemini-flash-latest"),
+      model: google("gemini-flash-lite-latest"),
       schema: mergeSchema,
       prompt: `You decide whether a new note and one or more existing notes describe the same underlying thought, and if so, synthesize them into one merged note.
 
@@ -53,7 +54,7 @@ ${matches.map(formatNote).join("\n")}`,
   } catch (error) {
     console.error("Merge API error:", error);
 
-    const status = error?.statusCode === 429 ? 429 : 500;
+    const status = isRateLimitError(error) ? 429 : 500;
     res.status(status).json({
       error:
         status === 429
