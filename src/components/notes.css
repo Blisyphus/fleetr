@@ -269,6 +269,24 @@
   text-align: left;
 }
 
+.expand-loading {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.75rem;
+}
+
+.expand-spinner {
+  flex-shrink: 0;
+  animation: expand-spin 0.8s linear infinite;
+}
+
+@keyframes expand-spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
 .expand-text {
   white-space: pre-wrap;
   color: var(--color-text);
