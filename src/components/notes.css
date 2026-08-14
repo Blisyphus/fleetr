@@ -261,3 +261,31 @@
 .expand-error {
   color: var(--color-danger);
 }
+
+/* Merge modal */
+.merge-modal {
+  max-width: 500px;
+  text-align: left;
+}
+
+.merge-related-to {
+  color: var(--color-text-muted);
+}
+
+.merge-preview {
+  background: var(--color-border);
+  border-radius: 8px;
+  padding: 1rem;
+  margin-bottom: 1.5rem;
+}
+
+.merge-preview_title {
+  margin: 0 0 0.5rem;
+  color: var(--color-text);
+}
+
+.merge-preview_text {
+  white-space: pre-wrap;
+  color: var(--color-text);
+  margin: 0;
+}

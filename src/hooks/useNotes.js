@@ -1,9 +1,12 @@
 import { useEffect, useRef, useState } from "react";
 import { v4 as uuid } from "uuid";
 import { supabase } from "../lib/supabaseClient.js";
+import { cosineSimilarity } from "../lib/similarity.js";
 import { useAuth } from "./useAuth.js";
 
 const LOCAL_KEY = "Notes";
+const MATCH_THRESHOLD = 0.75;
+const MATCH_COUNT = 3;
 
 const SEED_NOTES = [
   {
@@ -50,7 +53,13 @@ export const useNotes = () => {
   const [loading, setLoading] = useState(true);
   const [pendingCount, setPendingCount] = useState(0);
   const [lastSyncedAt, setLastSyncedAt] = useState(null);
+  const [mergeCandidate, setMergeCandidate] = useState(null);
   const hasMigrated = useRef(false);
+  const notesRef = useRef(notes);
+
+  useEffect(() => {
+    notesRef.current = notes;
+  }, [notes]);
 
   const withPending = async (fn) => {
     setPendingCount((c) => c + 1);
@@ -141,8 +150,10 @@ export const useNotes = () => {
   };
 
   const createNote = async (title, text) => {
+    let created = null;
+
     if (user) {
-      await withPending(async () => {
+      created = await withPending(async () => {
         const { data, error } = await supabase
           .from("notes")
           .insert({ user_id: user.id, title, text })
@@ -151,15 +162,114 @@ export const useNotes = () => {
         if (!error && data) {
           setNotes((prev) => [...prev, data]);
           setLastSyncedAt(new Date());
+          return data;
         }
+        return null;
       });
     } else {
-      setNotes((prev) => [
-        ...prev,
-        { id: uuid(), title, text, created_at: new Date().toISOString() },
-      ]);
+      created = { id: uuid(), title, text, created_at: new Date().toISOString() };
+      setNotes((prev) => [...prev, created]);
+    }
+
+    if (created) {
+      checkForMerge(created).catch((error) => {
+        console.error("Smart Merge check failed:", error);
+      });
+    }
+
+    return created;
+  };
+
+  const updateNoteEmbedding = async (id, embedding) => {
+    if (user) {
+      await supabase.from("notes").update({ embedding }).eq("id", id);
+    } else {
+      setNotes((prev) =>
+        prev.map((n) => (n.id === id ? { ...n, embedding } : n)),
+      );
     }
   };
+
+  const findMatchesLocal = (embedding, excludeId) =>
+    notesRef.current
+      .filter((n) => n.id !== excludeId && Array.isArray(n.embedding))
+      .map((n) => ({
+        id: n.id,
+        title: n.title,
+        text: n.text,
+        similarity: cosineSimilarity(embedding, n.embedding),
+      }))
+      .filter((n) => n.similarity >= MATCH_THRESHOLD)
+      .sort((a, b) => b.similarity - a.similarity)
+      .slice(0, MATCH_COUNT);
+
+  const findMatchesRemote = async (embedding, excludeId) => {
+    const { data, error } = await supabase.rpc("match_notes", {
+      query_embedding: embedding,
+      match_threshold: MATCH_THRESHOLD,
+      match_count: MATCH_COUNT,
+      exclude_note_id: excludeId,
+    });
+    if (error) throw error;
+    return data ?? [];
+  };
+
+  const checkForMerge = async (note) => {
+    const embedResponse = await fetch("/api/embed", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ text: note.text }),
+    });
+    const embedData = await embedResponse.json();
+    if (!embedResponse.ok) {
+      throw new Error(embedData.error || "Failed to embed note.");
+    }
+
+    await updateNoteEmbedding(note.id, embedData.embedding);
+
+    const matches = user
+      ? await findMatchesRemote(embedData.embedding, note.id)
+      : findMatchesLocal(embedData.embedding, note.id);
+
+    if (matches.length === 0) return;
+
+    const mergeResponse = await fetch("/api/merge", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({
+        newNote: { title: note.title, text: note.text },
+        matches,
+      }),
+    });
+    const mergeData = await mergeResponse.json();
+    if (!mergeResponse.ok) {
+      throw new Error(mergeData.error || "Failed to check for related notes.");
+    }
+
+    if (mergeData.shouldMerge) {
+      setMergeCandidate({
+        newNote: note,
+        matches,
+        mergedTitle: mergeData.mergedTitle,
+        mergedText: mergeData.mergedText,
+      });
+    }
+  };
+
+  const acceptMerge = async () => {
+    if (!mergeCandidate) return;
+    const { newNote, matches, mergedTitle, mergedText } = mergeCandidate;
+
+    await removeNote(newNote.id);
+    for (const match of matches) {
+      await removeNote(match.id);
+    }
+    await createNote(mergedTitle, mergedText);
+
+    setMergeCandidate(null);
+  };
+
+  const dismissMergeSuggestion = () => setMergeCandidate(null);
 
   const editNote = async (id, title, text) => {
     if (user) {
@@ -199,5 +309,8 @@ export const useNotes = () => {
     editNote,
     removeNote,
     refresh,
+    mergeCandidate,
+    acceptMerge,
+    dismissMergeSuggestion,
   };
 };
