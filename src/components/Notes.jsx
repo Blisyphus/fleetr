@@ -119,6 +119,7 @@ const Notes = () => {
                 id={note.id}
                 title={note.title}
                 text={note.text}
+                createdAt={note.created_at}
                 editHandler={editHandler}
                 deleteHandler={deleteHandler}
                 expandHandler={expandHandler}

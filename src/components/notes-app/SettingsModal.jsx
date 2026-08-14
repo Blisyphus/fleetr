@@ -6,7 +6,11 @@ import "./settings-modal.css";
 const SettingsModal = ({ onClose }) => {
   return (
     <div className="settings-modal_overlay" onClick={onClose}>
-      <div className="settings-modal" onClick={(event) => event.stopPropagation()}>
+      <div
+        className="settings-modal"
+        data-lenis-prevent
+        onClick={(event) => event.stopPropagation()}
+      >
         <div className="settings-modal_header">
           <button
             type="button"

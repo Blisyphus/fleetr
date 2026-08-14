@@ -125,7 +125,8 @@
 }
 
 .toolbar_new-note:hover {
-  background: #416b99;
+  /* background: #416b99; */
+  background: #537aa4;
 }
 
 .toolbar_synced-pill {
