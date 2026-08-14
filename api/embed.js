@@ -1,5 +1,6 @@
 import { embed } from "ai";
 import { google } from "@ai-sdk/google";
+import { isRateLimitError } from "./_util.js";
 
 const EMBEDDING_DIMENSIONS = 768;
 
@@ -29,7 +30,7 @@ export default async function handler(req, res) {
   } catch (error) {
     console.error("Embed API error:", error);
 
-    const status = error?.statusCode === 429 ? 429 : 500;
+    const status = isRateLimitError(error) ? 429 : 500;
     res.status(status).json({
       error:
         status === 429

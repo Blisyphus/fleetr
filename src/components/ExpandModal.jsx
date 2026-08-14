@@ -15,7 +15,14 @@ const SpinnerIcon = () => (
   </svg>
 );
 
-const ExpandModal = ({ status, error, expansion, onClose, onRetry }) => {
+const ExpandModal = ({
+  status,
+  error,
+  expansion,
+  onClose,
+  onRetry,
+  onRegenerate,
+}) => {
   const [copied, setCopied] = useState(false);
 
   const copyToClipboard = async () => {
@@ -56,6 +63,9 @@ const ExpandModal = ({ status, error, expansion, onClose, onRetry }) => {
             <div className="modal-buttons">
               <button className="confirm-btn" onClick={copyToClipboard}>
                 {copied ? "Copied!" : "Copy to Clipboard"}
+              </button>
+              <button className="cancel-btn" onClick={onRegenerate}>
+                Regenerate
               </button>
               <button className="cancel-btn" onClick={onClose}>
                 Close

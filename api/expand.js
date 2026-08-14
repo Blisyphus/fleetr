@@ -1,5 +1,6 @@
 import { generateText } from "ai";
 import { google } from "@ai-sdk/google";
+import { isRateLimitError } from "./_util.js";
 
 export default async function handler(req, res) {
   if (req.method !== "POST") {
@@ -16,7 +17,7 @@ export default async function handler(req, res) {
 
   try {
     const { text: expansion } = await generateText({
-      model: google("gemini-flash-latest"),
+      model: google("gemini-flash-lite-latest"),
       prompt: `You expand short "fleeting thought" notes into a fuller note a person could drop straight into a proper note-taking app.
 
 Rules:
@@ -34,7 +35,7 @@ ${text}
   } catch (error) {
     console.error("Expand API error:", error);
 
-    const status = error?.statusCode === 429 ? 429 : 500;
+    const status = isRateLimitError(error) ? 429 : 500;
     res.status(status).json({
       error:
         status === 429

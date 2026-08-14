@@ -17,6 +17,7 @@ const Notes = () => {
     searchQuery,
     editNote,
     removeNote,
+    saveExpansion,
     mergeCandidate,
     acceptMerge,
     dismissMergeSuggestion,
@@ -30,7 +31,7 @@ const Notes = () => {
   const [expandResult, setExpandResult] = useState("");
   const [expandError, setExpandError] = useState("");
 
-  const runExpand = async (text) => {
+  const runExpand = async (id, text) => {
     setExpandStatus("loading");
 
     try {
@@ -48,19 +49,25 @@ const Notes = () => {
 
       setExpandResult(data.expansion);
       setExpandStatus("success");
+      saveExpansion(id, data.expansion);
     } catch (error) {
       setExpandError(error.message);
       setExpandStatus("error");
     }
   };
 
-  const expandHandler = (id, text) => {
+  const expandHandler = (id, text, expandedText) => {
     setExpandTarget({ id, text });
-    runExpand(text);
+    if (expandedText) {
+      setExpandResult(expandedText);
+      setExpandStatus("success");
+    } else {
+      runExpand(id, text);
+    }
   };
 
-  const retryExpand = () => {
-    if (expandTarget) runExpand(expandTarget.text);
+  const rerunExpand = () => {
+    if (expandTarget) runExpand(expandTarget.id, expandTarget.text);
   };
 
   const closeExpand = () => {
@@ -123,6 +130,7 @@ const Notes = () => {
                 editHandler={editHandler}
                 deleteHandler={deleteHandler}
                 expandHandler={expandHandler}
+                expandedText={note.expanded_text}
               ></Note>
             ),
           )}
@@ -135,7 +143,8 @@ const Notes = () => {
           error={expandError}
           expansion={expandResult}
           onClose={closeExpand}
-          onRetry={retryExpand}
+          onRetry={rerunExpand}
+          onRegenerate={rerunExpand}
         />
       )}
       {mergeCandidate && (

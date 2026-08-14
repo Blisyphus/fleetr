@@ -73,7 +73,7 @@ export const useNotes = () => {
   const fetchNotes = async () => {
     const { data, error } = await supabase
       .from("notes")
-      .select("id, title, text, created_at")
+      .select("id, title, text, created_at, expanded_text")
       .order("created_at", { ascending: true });
 
     if (!error && data) {
@@ -276,7 +276,12 @@ export const useNotes = () => {
       const result = await withPending(async () => {
         const { error } = await supabase
           .from("notes")
-          .update({ title, text, updated_at: new Date().toISOString() })
+          .update({
+            title,
+            text,
+            expanded_text: null,
+            updated_at: new Date().toISOString(),
+          })
           .eq("id", id);
         if (!error) setLastSyncedAt(new Date());
         return error;
@@ -284,7 +289,21 @@ export const useNotes = () => {
       if (result) return;
     }
     setNotes((prev) =>
-      prev.map((n) => (n.id === id ? { ...n, title, text } : n)),
+      prev.map((n) =>
+        n.id === id ? { ...n, title, text, expanded_text: null } : n,
+      ),
+    );
+  };
+
+  const saveExpansion = async (id, expandedText) => {
+    if (user) {
+      await supabase
+        .from("notes")
+        .update({ expanded_text: expandedText })
+        .eq("id", id);
+    }
+    setNotes((prev) =>
+      prev.map((n) => (n.id === id ? { ...n, expanded_text: expandedText } : n)),
     );
   };
 
@@ -309,6 +328,7 @@ export const useNotes = () => {
     editNote,
     removeNote,
     refresh,
+    saveExpansion,
     mergeCandidate,
     acceptMerge,
     dismissMergeSuggestion,
