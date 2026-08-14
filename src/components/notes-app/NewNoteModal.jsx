@@ -122,6 +122,12 @@ const NewNoteModal = ({ onClose }) => {
           onChange={(event) => setText(event.target.value)}
           maxLength={150}
         ></textarea>
+
+        <div className="new-note_footer">
+          <span className="new-note_char-count">
+            {150 - text.length} characters left
+          </span>
+        </div>
       </div>
     </div>
   );

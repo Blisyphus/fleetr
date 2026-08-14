@@ -50,7 +50,28 @@ const SparkleIcon = () => (
   </svg>
 );
 
-const Note = ({ id, title, text, editHandler, deleteHandler, expandHandler }) => {
+const MONTHS = [
+  "Jan", "Feb", "Mar", "Apr", "May", "Jun",
+  "Jul", "Aug", "Sep", "Oct", "Nov", "Dec",
+];
+
+const formatCardDate = (dateString) => {
+  if (!dateString) return null;
+  const date = new Date(dateString);
+  return `${date.getDate()} ${MONTHS[date.getMonth()]}`;
+};
+
+const Note = ({
+  id,
+  title,
+  text,
+  createdAt,
+  editHandler,
+  deleteHandler,
+  expandHandler,
+}) => {
+  const dateLabel = formatCardDate(createdAt);
+
   return (
     <article className="note">
       <div className="note-content">
@@ -83,6 +104,7 @@ const Note = ({ id, title, text, editHandler, deleteHandler, expandHandler }) =>
           <span className="note_btn-label">Expand</span>
         </button>
       </div>
+      {dateLabel && <span className="note_timestamp">{dateLabel}</span>}
     </article>
   );
 };

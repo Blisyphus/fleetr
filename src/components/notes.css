@@ -75,6 +75,13 @@
     color: var(--color-text-muted);
 }
 
+.note_timestamp {
+    display: block;
+    text-align: right;
+    font-size: 12px;
+    color: var(--color-text-muted);
+}
+
 .note_footer {
     display: flex;
     align-items: center;
@@ -227,13 +234,22 @@
   transform: translateY(0);
 }
 
-/* Delete button */
+/* Confirm button (primary action) */
 .confirm-btn {
-  background-color: var(--color-danger);
-  color: var(--color-danger-contrast);
+  background-color: #36618e;
+  color: var(--color-accent-contrast);
 }
 
 .confirm-btn:hover {
+  background-color: #537aa4;
+}
+
+/* Delete button (destructive action, stays red) */
+.confirm-btn-danger {
+  background-color: var(--color-danger);
+}
+
+.confirm-btn-danger:hover {
   background-color: var(--color-danger-hover);
 }
 

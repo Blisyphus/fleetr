@@ -6,7 +6,7 @@ const DeleteModal = ({ onConfirm, onCancel }) => {
         <p>Are you sure you want to delete this note?</p>
 
         <div className="modal-buttons">
-          <button className="confirm-btn" onClick={onConfirm}>
+          <button className="confirm-btn confirm-btn-danger" onClick={onConfirm}>
             Yes
           </button>
 

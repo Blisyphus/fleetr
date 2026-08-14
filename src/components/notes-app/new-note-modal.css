@@ -95,3 +95,14 @@
 .new-note_body::placeholder {
   color: var(--color-text-muted);
 }
+
+.new-note_footer {
+  display: flex;
+  justify-content: flex-end;
+  margin-top: 0.5rem;
+}
+
+.new-note_char-count {
+  font-size: 12px;
+  color: var(--color-text-muted);
+}
